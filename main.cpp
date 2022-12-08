@@ -24,7 +24,7 @@ class Animal{
     
         string nome;
         int nivelFome;
-        string Raca;
+        string raca;
         Acoes acao;//agregação
     
     public:
@@ -40,6 +40,10 @@ class Animal{
     int getFome(){
         return this -> nivelFome;
     }
+//=============================================================================//
+    string getRaca(){
+        return this -> raca;
+    }
 /*+++++++++++++++++++++++++++++++++ SETTERS +++++++++++++++++++++++++++++++++++++*/  
     void setAcao(Acoes Acao){
         this -> acao = Acao;
@@ -53,23 +57,17 @@ class Animal{
         this -> nivelFome = Fome;
     }
 //=============================================================================//
+	void setRaca(string RACA){
+        this -> raca = RACA;
+    }
+//=============================================================================//
+	
 	virtual void comunicar(){
 		
 	}
     
 /*+++++++++++++++++++++++++++++++++ LÓGICA +++++++++++++++++++++++++++++++++++++*/   
-//    int levelUp(){
-//        int levelAtual;
-//        int proximoNivel = 50;
-//        int nivelExp = 0;
-//        
-//        for(levelAtual = 1; nivelExp > proximoNivel; levelAtual++){
-//            levelAtual = getLevel();
-//            cout<<"Seu nível atual eh: "<< levelAtual <<endl;
-//        }
-//        return levelAtual;
-//    }
-//=============================================================================//
+
 //    void calculaFome(int fomeAtual){
 //        
 //        int fomeMaxima = 100;
@@ -116,9 +114,33 @@ int menuPrincipal(){
     return choice;
 }
 
-string menuRaca(){
-	string listaRacasCao["beagle", "boxer", "dalmata"];
-	string listaRacasGato["siames"]
+string menuRaca(int escolhaMenu){
+	string listaRacasCao[3] = {"beagle", "boxer", "dalmata"};
+	string listaRacasGato[3] = {"siames", "angora", "ragdoll"};
+	
+	int indice;
+	if(escolhaMenu == 1){
+		cout<<"\n Agora chegou a hora de escolher a raca do seu cachorrinho"<<endl;
+		cout<<"1 - beagle"<<endl;
+		cout<<"2 - boxer"<<endl;
+		cout<<"3 - dalmata"<<endl;
+		
+		cin>> indice;
+		indice -= 1;
+		
+		return listaRacasCao[indice];
+	}
+	if(escolhaMenu == 2){
+		cout<<"\n Agora chegou a hora de escolher a raca do seu gatinho"<<endl;
+		cout<<"1 - siames"<<endl;
+		cout<<"2 - angora"<<endl;
+		cout<<"3 - ragdoll"<<endl;
+		
+		cin>> indice;
+		indice -= 1;
+		return listaRacasGato[indice];
+	}
+	
 }
 
 int main()
@@ -143,8 +165,10 @@ int main()
         	cao.setNome(nomePet);
         	cout<<"ENTAO O NOME DELE(A) EH: "<< cao.getNome() <<endl<<"MUITO BEM!";
         	
+        	bichinho.setRaca(menuRaca(escolhaMenuPrincipal));
+        	cout<<"A RACA DO SEU CACHORRINHO EH: "<< bichinho.getRaca() <<endl;
         	
-        	cout<<"Agora vamos cavar para encontrar comida, nao deixe seu bichinho com fome";
+        	cout<<"\n Agora vamos cavar para encontrar comida, nao deixe seu bichinho com fome";
     		break;
     		
     	case 2:
@@ -155,6 +179,11 @@ int main()
         	
         	cat.setNome(nomePet);
         	cout<<"ENTAO O NOME DELE(A) EH: "<< cat.getNome() <<endl<<"MUITO BEM!";
+        	
+        	bichinho.setRaca(menuRaca(escolhaMenuPrincipal));
+        	cout<<"A RACA DO SEU BICHANO EH: "<< bichinho.getRaca() <<endl;
+        	
+        	cout<<"\n Agora vamos procurar para encontrar comida, nao deixe seu bichinho com fome";
     		break;
     		
     	default:
