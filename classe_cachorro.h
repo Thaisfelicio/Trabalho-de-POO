@@ -7,12 +7,13 @@ using namespace std;
 
 class Cachorro: public Animal{
 	public:
-		string latir = "au au";
+
 	
 	
 		void comunicar(){
-			cout<<"Seu cachorro esta tentando se comunicar"<< latir <<endl;
+			cout<<"Au au!!" <<endl;
 		}
+		
 };
 
 #endif

@@ -10,14 +10,19 @@ faça uma aplicação que contenha ao menos duas classes, com os seguintes requisit
 *ao menos um tipo de edição de objetos - editar nome
 *ao menos dois tipos de apresentação de dados de objetos - a fome atual
 
+INTEGRANTES DO GRUPO:
+Thaís Felício
+Bruna Mayumi
+Márcio Rogério
 *******************************************************************************/
 #include <iostream>
-//#include <stdlib>
+#include <locale>
+#include <cstdlib>
+#include <vector>
 
 using namespace std;
 
-#include "classe_Acoes.h"
-
+#include "classe_explorar.h"
 /*_____________________________________CLASS_______________________________________*/
 class Animal{
     private:
@@ -25,12 +30,12 @@ class Animal{
         string nome;
         int nivelFome;
         string raca;
-        Acoes acao;//agregação
+        Explorar explore;
     
     public:
 /*+++++++++++++++++++++++++++++++++ GETTERS +++++++++++++++++++++++++++++++++++++*/   
-    Acoes getAcao(){
-        return this -> acao;
+ Explorar getExplorar(){
+        return this -> explore;
     }
 //=============================================================================//
     string getNome(){
@@ -45,8 +50,8 @@ class Animal{
         return this -> raca;
     }
 /*+++++++++++++++++++++++++++++++++ SETTERS +++++++++++++++++++++++++++++++++++++*/  
-    void setAcao(Acoes Acao){
-        this -> acao = Acao;
+	void setExplorar(Explorar explorei){
+        this -> explore = explorei;
     }
 //=============================================================================//
     void setNome(string NOME){
@@ -68,28 +73,56 @@ class Animal{
     
 /*+++++++++++++++++++++++++++++++++ LÓGICA +++++++++++++++++++++++++++++++++++++*/   
 
-//    void calculaFome(int fomeAtual){
-//        
-//        int fomeMaxima = 100;
-//        if(setAcao().getObjeto())
-//        
-//        if(fomeAtual > fomeMaxima){
-//        	cout<<"---- GAME OVER ----"<<endl;
-//        	cout<<"Seu pet morreu"<<endl;
-//		}
-//		return fomeAtual;
-//    }
     
     Animal calculaFome(Animal pet){
     	int fomeMaxima = 100;
+    	int fomeAtual = 0;
     	
-    	if(this->getFome() > fomeMaxima){
-    		cout<<"---- GAME OVER ----"<<endl;
-        	cout<<"Seu pet morreu"<<endl;
-		}
-		return pet;
-	}
+    	setFome(fomeAtual);
 
+		int condicao;
+
+    	do{
+    		if(explore.explorar() == - 10){
+    			cout<<"Parabens seu pet encontrou comida \n"<<endl;
+    			fomeAtual = getFome() + explore.explorar();
+    			cout<<"Sua fome esta em: "<< fomeAtual <<endl;
+    			setFome(fomeAtual);
+    			cout<<"Procurar novamente??"<<endl;
+				cout<<"Digite 1 para Sim ou 2 para Nao??"<<endl;
+				cin>>condicao;
+					if(condicao == 2){
+						cout<<"seu pet parou de bagunçar um pouco, \n seu nivel de fome continua o mesmo"<<endl;
+						cout<<"Sua fome esta em: "<< fomeAtual <<endl;
+					}    			    			
+				}
+			if(explore.explorar() == 30){
+				cout<<"Que pena, seu pet se distraiu e não encontrou comida \n"<<endl;
+				fomeAtual = getFome() + explore.explorar();
+				cout<<"Sua fome esta em: "<< fomeAtual <<endl;
+				setFome(fomeAtual);				
+    			cout<<"Procurar novamente??"<<endl;
+				cout<<"Digite 1 para Sim ou 2 para Nao??"<<endl;
+				cin>>condicao; 
+					if(condicao == 2){
+						cout<<"seu pet parou de bagunçar um pouco, \n seu nivel de fome continua o mesmo"<<endl;
+						cout<<"Sua fome esta em: "<< fomeAtual <<endl;
+					
+					} 
+				} 
+				if(this->getFome() >= fomeMaxima){
+		        		
+		    			cout<<"---- GAME OVER ----"<<endl;
+		        		cout<<"Seu pet morreu\n"<<endl;
+		        		
+		        	
+		    }
+				
+			}while(this->getFome() < fomeMaxima);
+			
+			
+		}
+	
 };
 
 #include "classe_cachorro.h"
@@ -104,8 +137,8 @@ int menuPrincipal(){
     	cout<<"BEM VINDO(A) AO HUNGRY'S PET";
     	cout<<"\n***************************************************"<<endl;
         cout<<"ESCOLHA SEU PET"<<endl;
-        cout<<"1 - cachorro"<<endl;
-        cout<<"2 - gato"<<endl;
+        cout<<"1 - Cachorro"<<endl;
+        cout<<"2 - Gato"<<endl;
     	
         cin>> choice;
         
@@ -115,26 +148,27 @@ int menuPrincipal(){
 }
 
 string menuRaca(int escolhaMenu){
-	string listaRacasCao[3] = {"beagle", "boxer", "dalmata"};
-	string listaRacasGato[3] = {"siames", "angora", "ragdoll"};
+	string listaRacasCao[3] = {"Beagle", "Boxer", "Dalmata"};
+	string listaRacasGato[3] = {"Siames", "Angora", "Ragdoll"};
 	
 	int indice;
 	if(escolhaMenu == 1){
 		cout<<"\n Agora chegou a hora de escolher a raca do seu cachorrinho"<<endl;
-		cout<<"1 - beagle"<<endl;
-		cout<<"2 - boxer"<<endl;
-		cout<<"3 - dalmata"<<endl;
+		cout<<"1 - Beagle"<<endl;
+		cout<<"2 - Boxer"<<endl;
+		cout<<"3 - Dalmata"<<endl;
 		
 		cin>> indice;
 		indice -= 1;
 		
 		return listaRacasCao[indice];
 	}
+	
 	if(escolhaMenu == 2){
 		cout<<"\n Agora chegou a hora de escolher a raca do seu gatinho"<<endl;
-		cout<<"1 - siames"<<endl;
-		cout<<"2 - angora"<<endl;
-		cout<<"3 - ragdoll"<<endl;
+		cout<<"1 - Siames"<<endl;
+		cout<<"2 - Angora"<<endl;
+		cout<<"3 - Ragdoll"<<endl;
 		
 		cin>> indice;
 		indice -= 1;
@@ -145,59 +179,84 @@ string menuRaca(int escolhaMenu){
 
 int main()
 {
+    setlocale(LC_ALL, "Portuguese");
+    int opcao;
     
-    int escolhaMenuPrincipal = menuPrincipal();
+    vector<Animal> listaDeAnimais;
+	
+    do{
+		int escolhaMenuPrincipal = menuPrincipal();
+		
+    	string fomeAgora;
+    	string nomePet;
     
-    string fomeAgora;
-    string nomePet;
+    	Animal *bichinho = new Animal;
+    	Cachorro *dog = new Cachorro;
+    	Gato *cat = new Gato;
     
-    Animal bichinho;
-    Cachorro cao;
-    Gato cat;
     
-    switch(escolhaMenuPrincipal){
-    	case 1:
-    		cout<<"Atencao, cuidado com seu quintal, cachorrinhos adoram cavar"<<endl;
-    		
-    		cout<<"\n QUAL SERA O NOME DO SEU CACHORRINHO?"<<endl;
-        	cin>>nomePet;
-        	
-        	cao.setNome(nomePet);
-        	cout<<"ENTAO O NOME DELE(A) EH: "<< cao.getNome() <<endl<<"MUITO BEM!";
-        	
-        	bichinho.setRaca(menuRaca(escolhaMenuPrincipal));
-        	cout<<"A RACA DO SEU CACHORRINHO EH: "<< bichinho.getRaca() <<endl;
-        	
-        	cout<<"\n Agora vamos cavar para encontrar comida, nao deixe seu bichinho com fome";
-    		break;
-    		
-    	case 2:
-    		cout<<"Atencao, gatinhos sao animais muito independentes, talvez eles \n sumam para procurar algo de vez em quando"<<endl;
-    		
-    		cout<<"\n QUAL SERA O NOME DO SEU GATINHO?"<<endl;
-        	cin>>nomePet;
-        	
-        	cat.setNome(nomePet);
-        	cout<<"ENTAO O NOME DELE(A) EH: "<< cat.getNome() <<endl<<"MUITO BEM!";
-        	
-        	bichinho.setRaca(menuRaca(escolhaMenuPrincipal));
-        	cout<<"A RACA DO SEU BICHANO EH: "<< bichinho.getRaca() <<endl;
-        	
-        	cout<<"\n Agora vamos procurar para encontrar comida, nao deixe seu bichinho com fome";
-    		break;
-    		
-    	default:
-    		cout<<endl;
-	}
-    
-//   switch(escolhaMenuPrincipal){
-//       case 1:
-//       if(comidaEncontrada > 10 && comidaEncontrada < 20){
-//       		cout<<"Infelizmente voce não encontrou nada \n Sua fome aumentou 10 pontos"<<endl;
-//       		
-//	   }
-//   }
-
-    return 0;
+	    	switch(escolhaMenuPrincipal){
+		    	case 1:
+		    		cout<<"Atencao, cuidado com seu quintal, cachorrinhos adoram cavar"<<endl;
+		    		
+		    		cout<<"\n QUAL SERA O NOME DO SEU CACHORRINHO?"<<endl;
+		        	cin>>nomePet;
+		        	
+		        	dog->setNome(nomePet);
+		        	cout<<"ENTAO O NOME DELE(A) EH: "<< dog->getNome() <<endl<<"MUITO BEM!"<<endl;
+		        	dog->comunicar();
+		        	
+		        	dog->setRaca(menuRaca(escolhaMenuPrincipal));
+		        	cout<<"A RACA DO SEU CACHORRINHO EH: "<< dog->getRaca() <<endl;
+		        	
+		        	cout<<"\n Agora vamos cavar para encontrar comida, nao deixe seu bichinho com fome" <<endl;
+		        	
+		        	cout<< dog->calculaFome(*dog).getFome() <<endl;
+		        	
+		        		if(dog->getFome() >= 100){
+		        			cout<<"Digite 1 para criar outro cachorro ou \n Digite 2 para criar outro gato \n ou digite 3 para sair"<<endl;
+		        		cin>>opcao;
+							if(opcao == 1 || opcao == 2)
+							opcao = escolhaMenuPrincipal;
+							
+						
+						else
+							cout<<"Obrigado por jogar, até logo...";
+						}
+		        		
+						
+		        	listaDeAnimais.push_back(*dog);	
+					
+				    
+		    		break;
+	    		
+		    	case 2:
+		    		cout<<"Atencao, gatinhos sao animais muito independentes, talvez eles \n sumam para procurar algo de vez em quando"<<endl;
+		    		
+		    		cout<<"\n QUAL SERA O NOME DO SEU GATINHO?"<<endl;
+		        	cin>>nomePet;
+		        	
+		        	cat->setNome(nomePet);
+		        	cout<<"ENTAO O NOME DELE(A) EH: "<< cat->getNome() <<endl<<"MUITO BEM!" <<endl;
+		        	cat->comunicar();
+	
+		        	
+		        	cat->setRaca(menuRaca(escolhaMenuPrincipal));
+		        	cout<<"A RACA DO SEU BICHANO EH: "<< cat->getRaca() <<endl;
+		        	
+		        	cout<<"\n Agora vamos procurar para encontrar comida, nao deixe seu bichinho com fome" <<endl;
+		        	cout<< cat->calculaFome(*cat).getFome() <<endl;
+		        	listaDeAnimais.push_back(*cat);	
+		
+		    		break;
+		    		
+		    	default:
+		    		cout<<endl;
+	    		
+    		}
+       
+		}while(opcao == 1 || opcao == 2);
+	
+	return 0;
 }
 

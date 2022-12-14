@@ -6,13 +6,11 @@
 using namespace std;
 
 class Gato: public Animal{
-	public:
-		string miar = "miau";
-
-	
+	public:	
 		void comunicar(){
-			cout<<"Seu gato esta tentando se comunicar "<< miar <<endl;
-		}
+			cout<<"Miau miuau" <<endl;
+	}
+
 };
 
 #endif
