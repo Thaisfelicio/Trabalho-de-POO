@@ -3,4 +3,5 @@ Este repositório terá conceitos de herança, agregação e polimorfismo. Este 
 
 Diagrama do trabalho
 
-![diagrama do trabalho de poo atualizado](https://user-images.githubusercontent.com/83433694/205894148-fb7995c2-4d88-4384-a5f1-3ccf4b0cb934.png)
+
+![diagrama do trabalho (atualizado)](https://user-images.githubusercontent.com/83433694/207588483-41c38361-7e2c-494f-8bda-45654cd7bcde.jpg)
